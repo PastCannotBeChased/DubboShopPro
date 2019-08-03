@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xy.dubboshoppro.mapper.TProductDetailMapper">
+  <resultMap id="BaseResultMap" type="com.xy.dubboshoppro.entity.TProductDetail">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="table_product_id" jdbcType="BIGINT" property="tableProductId" />
+    <result column="table_product_storage" jdbcType="INTEGER" property="tableProductStorage" />
+    <result column="table_product_detail" jdbcType="VARCHAR" property="tableProductDetail" />
+    <result column="table_product_price" jdbcType="DECIMAL" property="tableProductPrice" />
+    <result column="table_type_id" jdbcType="BIGINT" property="tableTypeId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, table_product_id, table_product_storage, table_product_detail, table_product_price, 
+    table_type_id
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_product_detail
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from t_product_detail
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.xy.dubboshoppro.entity.TProductDetail">
+    insert into t_product_detail (id, table_product_id, table_product_storage, 
+      table_product_detail, table_product_price, 
+      table_type_id)
+    values (#{id,jdbcType=BIGINT}, #{tableProductId,jdbcType=BIGINT}, #{tableProductStorage,jdbcType=INTEGER}, 
+      #{tableProductDetail,jdbcType=VARCHAR}, #{tableProductPrice,jdbcType=DECIMAL}, 
+      #{tableTypeId,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.xy.dubboshoppro.entity.TProductDetail">
+    insert into t_product_detail
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="tableProductId != null">
+        table_product_id,
+      </if>
+      <if test="tableProductStorage != null">
+        table_product_storage,
+      </if>
+      <if test="tableProductDetail != null">
+        table_product_detail,
+      </if>
+      <if test="tableProductPrice != null">
+        table_product_price,
+      </if>
+      <if test="tableTypeId != null">
+        table_type_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="tableProductId != null">
+        #{tableProductId,jdbcType=BIGINT},
+      </if>
+      <if test="tableProductStorage != null">
+        #{tableProductStorage,jdbcType=INTEGER},
+      </if>
+      <if test="tableProductDetail != null">
+        #{tableProductDetail,jdbcType=VARCHAR},
+      </if>
+      <if test="tableProductPrice != null">
+        #{tableProductPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="tableTypeId != null">
+        #{tableTypeId,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xy.dubboshoppro.entity.TProductDetail">
+    update t_product_detail
+    <set>
+      <if test="tableProductId != null">
+        table_product_id = #{tableProductId,jdbcType=BIGINT},
+      </if>
+      <if test="tableProductStorage != null">
+        table_product_storage = #{tableProductStorage,jdbcType=INTEGER},
+      </if>
+      <if test="tableProductDetail != null">
+        table_product_detail = #{tableProductDetail,jdbcType=VARCHAR},
+      </if>
+      <if test="tableProductPrice != null">
+        table_product_price = #{tableProductPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="tableTypeId != null">
+        table_type_id = #{tableTypeId,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xy.dubboshoppro.entity.TProductDetail">
+    update t_product_detail
+    set table_product_id = #{tableProductId,jdbcType=BIGINT},
+      table_product_storage = #{tableProductStorage,jdbcType=INTEGER},
+      table_product_detail = #{tableProductDetail,jdbcType=VARCHAR},
+      table_product_price = #{tableProductPrice,jdbcType=DECIMAL},
+      table_type_id = #{tableTypeId,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

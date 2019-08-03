@@ -17,5 +17,12 @@
         <module>shoppro-common</module>
     </modules>
 
-
+    <dependencies>
+        <!--mybatis逆向工程-->
+<!--        <dependency>-->
+<!--            <groupId>com.xy</groupId>-->
+<!--            <artifactId>mybatisgenerator</artifactId>-->
+<!--            <version>0.0.1-SNAPSHOT</version>-->
+<!--        </dependency>-->
+    </dependencies>
 </project>

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xy.dubboshoppro.mapper.TProductTypeMapper">
+  <resultMap id="BaseResultMap" type="com.xy.dubboshoppro.entity.TProductType">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="type_name" jdbcType="CHAR" property="typeName" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, type_name
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_product_type
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from t_product_type
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.xy.dubboshoppro.entity.TProductType">
+    insert into t_product_type (id, type_name)
+    values (#{id,jdbcType=BIGINT}, #{typeName,jdbcType=CHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.xy.dubboshoppro.entity.TProductType">
+    insert into t_product_type
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="typeName != null">
+        type_name,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="typeName != null">
+        #{typeName,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xy.dubboshoppro.entity.TProductType">
+    update t_product_type
+    <set>
+      <if test="typeName != null">
+        type_name = #{typeName,jdbcType=CHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xy.dubboshoppro.entity.TProductType">
+    update t_product_type
+    set type_name = #{typeName,jdbcType=CHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>
