@@ -33,7 +33,12 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
-
+        <!--分布式文件系统-->
+        <dependency>
+            <groupId>com.github.tobato</groupId>
+            <artifactId>fastdfs-client</artifactId>
+            <version>1.26.1-RELEASE</version>
+        </dependency>
         <!--公共的dubbo相关-->
         <dependency>
             <groupId>com.alibaba.boot</groupId>

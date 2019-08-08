@@ -3,7 +3,7 @@ dubbo:
     name: shoppro-product-service
   registry:
     protocol: zookeeper
-    address: 10.36.141.66:2181
+    address: 120.78.77.179:2181
   protocol:
     port: 20880
 
@@ -11,9 +11,24 @@ spring:
   thymeleaf:
     cache: false
   datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
+    #driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/shopprodubbo?useUnicode=true&characterEncoding=utf-8&serverTimezone=UTC
     username: root
-    password: 123
+    password: Z3VkwAO48MDhx3Z9IRBWomfTqvxTPoSp+4kdeHTIPMM41jJcemcG3jeASKYV4QUU4tEigHdH+O5FqOolCYHq8w==
+    driver-class-name: com.mysql.jdbc.Driver
+    druid:
+      initial-size: 10
+      max-active: 100
+      min-idle: 10
+      filter:
+        config:
+          enabled: true
+      connection-properties: config.decrypt=true;config.decrypt.key=${public-key}
 mybatis:
   mapper-locations:  classpath:/mapper/*.xml
+
+public-key: MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBAKsh76eUJQBRWnlzzSEzAY6EWJztyw5Ypk8SDyLMTiX7sD/V3+vYxb0uVALoPQCqOhPRc63GnQiUmO/8Z1RgtJECAwEAAQ==
+#分页###################
+pagehelper:
+  reasonable: true
+  helper-dialect: mysql

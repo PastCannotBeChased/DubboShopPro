@@ -13,6 +13,7 @@
     <packaging>pom</packaging>
     <modules>
         <module>shoppro-product-api</module>
+        <module>productType-api</module>
     </modules>
 
 

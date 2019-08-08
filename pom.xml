@@ -11,7 +11,6 @@
     <modules>
         <module>shoppro-api</module>
         <module>shoppro-basic</module>
-        <module>shoppro-api</module>
         <module>shoppro-service</module>
         <module>shoppro-web</module>
     </modules>

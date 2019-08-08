@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Title</title>
+    <!-- Bootstrap -->
+    <link rel="stylesheet"  href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css"/>
+    <!--uploadfive-->
+    <link rel="stylesheet" type="text/css" href="css/uploadifive.css">
+</head>
+<body>
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    <h4 class="modal-title" id="modifyModalLabel">商品添加</h4>
+</div>
+<div class="modal-body">
+    <form class="form-horizontal" method="get" action="product/addProduct" id="form2">
+        <div class="form-group">
+            <label for="file_upload" class="col-sm-2 control-label">产品图片:</label>
+            <div class="col-sm-4">
+                <img src="#" id="showImage" style="display: none" width="100px" height="100px"/>
+                <input id="file_upload" type="file" name="" />
+                <input type="hidden" name="product.images"id="input4"/>
+            </div>
+        </div>
+        <div class="form-group"><input type="hidden" name="product.id"/>
+            <label for="input1" class="col-sm-2 control-label">产品类别:</label>
+            <div class="col-sm-10">
+                <input required type="text" name="product.typeName"class="form-control" id="input1" placeholder="产品类别">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="input2" class="col-sm-2 control-label">产品名称:</label>
+            <div class="col-sm-10">
+                <input required type="text" name="product.name"class="form-control" id="input2" placeholder="产品名称">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="input3" class="col-sm-2 control-label">产品价格:</label>
+            <div class="col-sm-10">
+                <input required type="text" name="product.price" class="form-control" id="input3" placeholder="产品价格">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="input31" class="col-sm-2 control-label">折后价:</label>
+            <div class="col-sm-10">
+                <input required type="text" name="product.salePrice"class="form-control" id="input31" placeholder="折后价">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="input5" class="col-sm-2 control-label">产品卖点:</label>
+            <div class="col-sm-10">
+                <input required type="text" name="product.salePoint"class="form-control" id="input5" placeholder="产品卖点">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="editor" class="col-sm-2 control-label">产品描述:</label>
+            <div class="col-sm-10">
+                <input type="hidden" name="productDesc"  id="input6"/>
+                <!-- 加载编辑器的容器 -->
+                <div id="editor" name="content">
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+    <button type="button" class="btn btn-success" id="addSure">确认修改</button>
+</div>
+<!-- jQuery (Bootstrap 的所有 JavaScript 插件都依赖 jQuery，所以必须放在前边) -->
+<script src="https://cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+<!-- 加载 Bootstrap 的所有 JavaScript 插件。你也可以根据需要只加载单个插件。 -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js"></script>
+<!--uploadfive-->
+<script src="js/jquery.uploadifive.js" type="text/javascript"></script>
+<!-- 配置文件 -->
+<!-- 注意， 只需要引用 JS，无需引用任何 CSS ！！！-->
+<script type="text/javascript" src="js/wangEditor.min.js"></script>
+<script type="text/javascript">
+    $(function () {
+        //富文本框
+        var E = window.wangEditor
+        var editor = new E('#editor')
+        // 自定义菜单配置
+        editor.customConfig.menus = [
+            'head',  // 标题
+            'bold',  // 粗体
+            'fontSize',  // 字号
+            'fontName',  // 字体
+            'link',  // 插入链接
+            'justify',  // 对齐方式
+            'image',  // 插入图片
+            'table',  // 表格
+            'video',  // 插入视频
+            'undo',  // 撤销
+            'redo'  // 重复
+        ]
+        // 配置服务器端地址
+        editor.customConfig.uploadImgServer = 'file/uploads'
+        editor.customConfig.uploadFileName = 'files'
+        // insert(imgUrl)
+        editor.create()
+
+        $("#addSure").click(function () {
+            $('#input6').val(editor.txt.html());
+            $("#form2").submit();
+        })
+        //上传文件
+        $('#file_upload').uploadifive({
+            'uploadScript': 'file/upload',
+            'fileObjName' : 'file',
+            'buttonText'  : '图片上传',
+            'removeCompleted' : true,
+            // Put your options here
+            'onUploadComplete' : function(file, data) {
+                // alert('The file ' + file.name + ' uploaded successfully.');
+                // console.log(data);
+                // console.log(file);
+                var data=JSON.parse(data);
+                if(data.statusCode==200){
+                    $('#showImage').attr('src',data.data).show();
+                    $('#input4').val(data.data);
+                }else{
+                    alert(data.data);
+                }
+            }
+        });
+    })
+</script>
+</body>
+</html>
